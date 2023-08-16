@@ -8,7 +8,7 @@ use Minicli\Command\CommandController;
 class DefaultController extends CommandController
 {
 
-    private string $urn = 'cidade/_week_/codigo_da_localidade/previsao.xml';
+    private string $urn = 'cidade/_week_/codigo_da_localidade/_previsao_.xml';
     private string $cityCode;
 
     public function make(): void
@@ -16,6 +16,7 @@ class DefaultController extends CommandController
         $this->cityCode = $this->getParam('cityCode');
         $this->urn = str_replace('codigo_da_localidade', $this->cityCode, $this->urn);
         $this->hasFlag('week') ? $this->urn = str_replace('_week_', '7dias', $this->urn) : $this->urn = str_replace('_week_/', '', $this->urn);
+        $this->hasFlag('extend') ? $this->urn = str_replace('_previsao_', 'estendida', $this->urn) : $this->urn = str_replace('_previsao_', 'previsao', $this->urn);
     }
 
     public function handle(): void
