@@ -31,10 +31,10 @@ class DefaultController extends CommandController
         $this->display("Search weather from {$weather['nome']} - {$weather['uf']}");
 
         $table = new TableHelper();
-        $table->addHeader(['Dia', 'Tempo', 'Maxima']);
+        $table->addHeader(['Dia', 'Tempo', 'Minima', 'Maxima']);
 
         foreach ($weather['previsao'] as $previsao) {
-            $table->addRow([$previsao['dia'], $previsao['tempo'], $previsao['maxima']]);
+            $table->addRow([$previsao['dia'], $previsao['tempo'], $previsao['minima'] ,$previsao['maxima']]);
         }
 
 
