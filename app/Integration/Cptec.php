@@ -13,9 +13,9 @@ class Cptec
 
     public function getWeather()
     {
-        $url = $this->base_url . $this->urn;
-        var_dump($url);
-        $xml = simplexml_load_file($url);
+        $uri = $this->base_url . $this->urn;
+        var_dump($uri);
+        $xml = simplexml_load_file($uri);
         $json = json_encode($xml);
         $array = json_decode($json,TRUE);
         return $array;
