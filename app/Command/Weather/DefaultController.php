@@ -4,6 +4,8 @@ namespace App\Command\Weather;
 
 use App\Integration\Cptec;
 use Minicli\Command\CommandController;
+use Minicli\Output\Filter\ColorOutputFilter;
+use Minicli\Output\Helper\TableHelper;
 
 class DefaultController extends CommandController
 {
@@ -25,10 +27,20 @@ class DefaultController extends CommandController
         $client = new Cptec($this->urn);
 
         $weather = $client->getWeather();
-        var_dump($weather);
-        $this->display($weather['nome'], true);
-        $this->display($weather['previsao'][0]['dia'], true);
-        $this->display($weather['previsao'][0]['tempo'], true);
-        $this->display("capitals weather command controller");
+
+        $this->display("Search weather from {$weather['nome']} - {$weather['uf']}");
+
+        $table = new TableHelper();
+        $table->addHeader(['Dia', 'Tempo', 'Maxima']);
+
+        foreach ($weather['previsao'] as $previsao) {
+            $table->addRow([$previsao['dia'], $previsao['tempo'], $previsao['maxima']]);
+        }
+
+
+        $this->newline();
+        $this->rawOutput($table->getFormattedTable(new ColorOutputFilter()));
+        $this->newline();
+
     }
 }
