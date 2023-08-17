@@ -16,6 +16,8 @@ class Cptec
         $url = $this->base_url . $this->urn;
         var_dump($url);
         $xml = simplexml_load_file($url);
-        return $xml;
+        $json = json_encode($xml);
+        $array = json_decode($json,TRUE);
+        return $array;
     }
 }
