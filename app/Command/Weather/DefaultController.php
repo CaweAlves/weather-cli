@@ -26,6 +26,9 @@ class DefaultController extends CommandController
 
         $weather = $client->getWeather();
         var_dump($weather);
+        $this->display($weather['nome'], true);
+        $this->display($weather['previsao'][0]['dia'], true);
+        $this->display($weather['previsao'][0]['tempo'], true);
         $this->display("capitals weather command controller");
     }
 }
